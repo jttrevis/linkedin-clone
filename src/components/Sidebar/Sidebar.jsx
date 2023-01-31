@@ -16,7 +16,10 @@ const Sidebar = () => {
 					src='https://images.unsplash.com/photo-1661961110671-77b71b929d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
 					alt=''
 				/>
-				<Avatar className='sidebar__avatar' />
+				<Avatar
+					src='https://imageio.forbes.com/specials-images/imageserve/62d700cd6094d2c180f269b9/0x0.jpg?format=jpg&crop=959,959,x0,y0,safe&height=416&width=416&fit=bounds'
+					className='sidebar__avatar'
+				/>
 				<h2>Elon Musk</h2>
 				<h4>eleonmusk@gmail.com</h4>
 			</div>

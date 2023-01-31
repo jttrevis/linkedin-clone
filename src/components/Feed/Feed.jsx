@@ -1,10 +1,12 @@
 import './Feed.css';
+import userPhoto from '../../assets/images/eu.jpg';
 import CreateIcon from '@mui/icons-material/Create';
 import InputOptions from './../InputOptions/InputOptions';
 import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
+import Post from './../Post/Post';
 const Feed = () => {
 	return (
 		<div className='feed'>
@@ -39,6 +41,15 @@ const Feed = () => {
 					/>
 				</div>
 			</div>
+
+			<Post
+				photoUrl={
+					'https://imageio.forbes.com/specials-images/imageserve/62d700cd6094d2c180f269b9/0x0.jpg?format=jpg&crop=959,959,x0,y0,safe&height=416&width=416&fit=bounds'
+				}
+				name={'Elon Musk'}
+				description={'Genius'}
+				message={'BUY BITCOIN!!!'}
+			/>
 		</div>
 	);
 };
