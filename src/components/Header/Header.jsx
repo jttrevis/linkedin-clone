@@ -1,7 +1,6 @@
 import './Header.css';
 import React from 'react';
 import HeaderOptions from '../HeaderOptions/HeaderOptions';
-import userPhoto from '../../assets/images/eu.jpg';
 
 import LinkedInIcon from '../../assets/images/Link.svg';
 import SearchIcon from '@mui/icons-material/Search';

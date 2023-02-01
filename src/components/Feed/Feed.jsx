@@ -1,5 +1,5 @@
 import './Feed.css';
-import userPhoto from '../../assets/images/eu.jpg';
+
 import CreateIcon from '@mui/icons-material/Create';
 import InputOptions from './../InputOptions/InputOptions';
 import ImageIcon from '@mui/icons-material/Image';
@@ -7,15 +7,57 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from './../Post/Post';
+import { useEffect, useState } from 'react';
+import { db } from '../../services/Firebase';
+import firebase from 'firebase';
+
 const Feed = () => {
+	const [posts, setPosts] = useState([]);
+	const [input, setInput] = useState('');
+
+	useEffect(() => {
+		db.collection('posts')
+			.orderBy('timestamp', 'desc')
+			.onSnapshot((snapshot) =>
+				setPosts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					})),
+				),
+			);
+	}, []);
+
+	const sendPost = (e) => {
+		e.preventDefault();
+
+		db.collection('posts').add({
+			name: 'Elon Musk',
+			description: 'this is a test',
+			message: input,
+			photoUrl: '',
+			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		});
+		setInput('');
+	};
+
 	return (
 		<div className='feed'>
 			<div className='feed__inputContainer'>
 				<div className='feed__input'>
 					<CreateIcon />
 					<form className=''>
-						<input type='text' />
-						<button type='submit'>Send</button>
+						<input
+							value={input}
+							onChange={(e) => setInput(e.target.value)}
+							type='text'
+						/>
+						<button
+							onClick={sendPost}
+							type='submit'
+						>
+							Send
+						</button>
 					</form>
 				</div>
 				<div className='feed__inputOptions'>
@@ -42,14 +84,15 @@ const Feed = () => {
 				</div>
 			</div>
 
-			<Post
-				photoUrl={
-					'https://imageio.forbes.com/specials-images/imageserve/62d700cd6094d2c180f269b9/0x0.jpg?format=jpg&crop=959,959,x0,y0,safe&height=416&width=416&fit=bounds'
-				}
-				name={'Elon Musk'}
-				description={'Genius'}
-				message={'BUY BITCOIN!!!'}
-			/>
+			{posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+				<Post
+					key={id}
+					name={name}
+					description={description}
+					message={message}
+					photoUrl={photoUrl}
+				/>
+			))}
 		</div>
 	);
 };

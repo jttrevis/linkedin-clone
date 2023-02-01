@@ -2,11 +2,13 @@
   background-color: #f3f2ef;
   display: flex;
   flex-direction: column;
-  
+
 }
 
 
 .app__body {
   display: flex;
-  
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
