@@ -9,8 +9,17 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../services/Firebase';
+import { logout } from '../../features/userSlice';
 
 const Header = () => {
+	const dispatch = useDispatch();
+
+	const logoutOfApp = () => {
+		dispatch(logout());
+		auth.signOut();
+	};
 	return (
 		<div className='header'>
 			<div className='header__left'>
@@ -21,7 +30,10 @@ const Header = () => {
 
 				<div className='header__search'>
 					<SearchIcon />
-					<input type='text' />
+					<input
+						placeholder='Search'
+						type='text'
+					/>
 				</div>
 			</div>
 
@@ -50,10 +62,9 @@ const Header = () => {
 					title='Notifications'
 				/>
 				<HeaderOptions
-					avatar={
-						'https://imageio.forbes.com/specials-images/imageserve/62d700cd6094d2c180f269b9/0x0.jpg?format=jpg&crop=959,959,x0,y0,safe&height=416&width=416&fit=bounds'
-					}
-					title=' me '
+					avatar={true}
+					onClick={logoutOfApp}
+					title='Sing Out'
 				/>
 			</div>
 		</div>
